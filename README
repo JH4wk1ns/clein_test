@@ -1,0 +1,82 @@
+# clein_test
+
+A Node.js project for managing and analyzing stock trading data using SQLite.  
+This project provides a database layer for storing news sentiment, stock analysis, trade executions, portfolio tracking, and account balances.
+
+## Features
+
+- **News Sentiment Storage:** Save and track news articles with sentiment analysis.
+- **Stock Analysis:** Record predictions and analysis based on news sentiment and price changes.
+- **Trade Execution Records:** Log trade actions, status, and errors.
+- **Portfolio Tracking:** Maintain current holdings and investment details.
+- **Account Balance Tracking:** Track available funds and portfolio value.
+
+## Project Structure
+
+```
+clein_test/
+├── data/
+│   └── trading.db           # SQLite database file (auto-created)
+├── src/
+│   └── database/
+│       └── db.js            # Database class and schema definitions
+├── package.json             # Project metadata and dependencies
+└── README.md                # Project documentation
+```
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or higher recommended)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone <repo-url>
+    cd clein_test
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+### Usage
+
+The main database logic is in `src/database/db.js`. To initialize the database:
+
+```javascript
+const { Database } = require('./src/database/db');
+
+(async () => {
+    const db = new Database();
+    await db.initialize();
+    // Use db.run(), db.get(), db.all() as needed
+    await db.close();
+})();
+```
+
+This will create the SQLite database at `data/trading.db` and set up all required tables.
+
+## Database Schema
+
+- **news_sentiment:** Stores news articles and their sentiment.
+- **stock_analysis:** Links news sentiment to stock price predictions.
+- **trade_executions:** Records trade actions and their outcomes.
+- **portfolio:** Tracks current stock holdings.
+- **account_balance:** Tracks available funds and portfolio value.
+
+## Configuration
+
+- Database file location is set in `src/database/db.js`:
+    ```js
+    this.dbPath = path.join(__dirname, '../../data/trading.db');
+    ```
+- Default account balance is initialized to 10,000 units.
+
+## License
+
+MIT License
